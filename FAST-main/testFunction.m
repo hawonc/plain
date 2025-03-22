@@ -55,7 +55,7 @@ end
 
 %% call the respective mission profile function
 % define the targets (in m or min)
-Mission.Target.Valu = [UnitConversionPkg.ConvLength(Range, "naut mi", "m")];
+Mission.Target.Valu = Range;
 
 % define the target types ("Dist" or "Time")
 Mission.Target.Type = "Dist";
