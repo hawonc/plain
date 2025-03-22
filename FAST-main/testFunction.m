@@ -1,11 +1,9 @@
+function [Aircraft] = testFunction(EngineType,Passengers,Range,BA,EA)
 %% Create Aircraft
 Aircraft = AircraftSpecsPkg.Example;
 
 
 %% Define User Inputs
-EngineType = "Turbofan";
-Passengers = 100;
-Range = 703;
 
 Aircraft.Specs.TLAR.Class = EngineType;
 Aircraft.Specs.TLAR.MaxPax = Passengers;
@@ -73,8 +71,8 @@ Mission.Segs = ["Takeoff"; "Climb"; "Cruise"; "Descent";"Landing"];
 Mission.ID   = [        1;       1;        1;        1;  1];
 
 % define the starting/ending altitudes (in m)
-Mission.AltBeg =  UnitConversionPkg.ConvLength([    0;     0; 22000; 22000;  0], "ft", "m");
-Mission.AltEnd =  UnitConversionPkg.ConvLength([    0; 22000; 22000;  0;  0], "ft", "m");
+Mission.AltBeg =  BA;
+Mission.AltEnd =  EA;
 
 % define the climb rate (in m/s)
 Mission.ClbRate = [  NaN;   NaN;   NaN;   NaN;   NaN];
@@ -159,3 +157,5 @@ disp(Aircraft.Specs.Weight.OEW);
 disp(Aircraft.Specs.Weight.Fuel);
 disp(Aircraft.Geometry.LengthSet);
 disp(Aircraft.Specs.Aero.S);
+
+end
