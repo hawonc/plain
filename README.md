@@ -14,3 +14,7 @@ npm run start
 
 To make tailwindcss
 npx tailwindcss -o dist/output.css --watch
+
+
+# References
+Mokotoff, P., Arnson, M., Wang, Y. C., & Cinar, G. (2025). FAST: A Future Aircraft Sizing Tool for Conventional and Electrified Aircraft Design. In AIAA SciTech 2025 Forum (p. 2374).
