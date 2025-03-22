@@ -1,26 +1,90 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    /> 
-    <meta
-      http-equiv="X-Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
-    />
-    <link href="./dist/output.css" rel="stylesheet">
-    <title>pl.AI.n</title>
-  </head>
-  <body class="bg-gray-100 text-gray-900 font-sans">
-    <div class="flex flex-col items-center justify-center min-h-screen">
-      <h1 class="text-4xl font-bold text-blue-600 mb-4">
-        Hello from Electron renderer!
-      </h1>
-      <p class="text-xl mb-2">👋</p>
-      <p id="info" class="text-gray-700">Welcome to the world of Electron!</p>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'" />
+  <link href="./dist/output.css" rel="stylesheet">
+  <title>Chat with pl.AI.n</title>
+</head>
+<body class="bg-[url(./panam.png)] bg-cover bg-center bg-no-repeat text-gray-900 font-sans">
+  <!-- Chat container with Glassmorphism effect -->
+  <div class="flex flex-col items-center justify-center min-h-screen py-6 px-4">
+    <div class="w-full max-w-xl bg-white bg-opacity-30 backdrop-blur-xl rounded-lg p-6 shadow-lg border border-white border-opacity-40">
+      <div id="chat-box" class="h-80 overflow-y-scroll mb-4 space-y-4">
+        <!-- Messages will be dynamically inserted here -->
+      </div>
+
+      <!-- Input box -->
+      <div class="flex items-center space-x-4">
+        <input 
+          id="user-input" 
+          type="text" 
+          placeholder="Type your message..." 
+          class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+        <button 
+          id="send-button"
+          class="px-4 py-2 bg-[#00274D] text-white rounded-lg hover:bg-blue-700 focus:outline-none"
+        >
+          Send
+        </button>
+      </div>
     </div>
-    <script src="./renderer.js"></script>
-  </body>
+  </div>
+
+  <!-- ChatBot Logic (Optional: Can be added later with JS) -->
+  <script>
+    // Access DOM elements
+    const chatBox = document.getElementById('chat-box');
+    const userInput = document.getElementById('user-input');
+    const sendButton = document.getElementById('send-button');
+
+    // Function to append a message to the chat
+    function appendMessage(message, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('flex', 'space-x-2', 'items-start');
+      
+      const avatar = document.createElement('div');
+      avatar.classList.add('w-8', 'h-8', 'rounded-full', 'bg-gray-300');
+      
+      const messageContent = document.createElement('div');
+      messageContent.classList.add(
+        sender === 'user' ? 'bg-blue-100' : 'bg-gray-200', 
+        'p-3', 'rounded-lg', 'max-w-xs', 'text-sm', 'text-gray-900', 
+        sender === 'user' ? 'ml-auto' : ''
+      );
+      messageContent.textContent = message;
+
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(messageContent);
+      chatBox.appendChild(messageDiv);
+
+      // Scroll to the bottom of the chat after new message
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Handle user input on send button click
+    sendButton.addEventListener('click', () => {
+      const message = userInput.value.trim();
+      if (message !== '') {
+        appendMessage(message, 'user');
+        userInput.value = '';
+        
+        // Simulate a response from the bot
+        setTimeout(() => {
+          appendMessage('This is a simulated response from the bot.', 'bot');
+        }, 1000);
+      }
+    });
+
+    // Handle user input on Enter key press
+    userInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        sendButton.click();
+      }
+    });
+  </script>
+
+</body>
 </html>
