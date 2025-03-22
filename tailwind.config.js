@@ -6,8 +6,11 @@ module.exports = {
     "./styles.css",  // Include your styles file
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'catchmeifyoucan': "url('/panam.png')", // Ensure the path matches the root of the project
+      }
+    },
   },
   plugins: [],
 }
-
