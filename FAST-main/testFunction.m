@@ -1,4 +1,4 @@
-function [Aircraft] = testFunction(EngineType,Passengers,Range,BA,EA)
+function [MTOW,OEW,Fuel,Length,S] = testFunction(EngineType,Passengers,Range,BA,EA)
 %% Create Aircraft
 Aircraft = AircraftSpecsPkg.Example;
 
@@ -152,10 +152,10 @@ end
 % ----------------------------------------------------------
 
 %% Display
-disp(Aircraft.Specs.Weight.MTOW);
-disp(Aircraft.Specs.Weight.OEW);
-disp(Aircraft.Specs.Weight.Fuel);
-disp(Aircraft.Geometry.LengthSet);
-disp(Aircraft.Specs.Aero.S);
+MTOW = Aircraft.Specs.Weight.MTOW;
+OEW = Aircraft.Specs.Weight.OEW;
+Fuel = Aircraft.Specs.Weight.Fuel;
+Length = Aircraft.Geometry.LengthSet;
+S = Aircraft.Specs.Aero.S;
 
 end
