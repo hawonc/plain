@@ -7,7 +7,7 @@ Aircraft = AircraftSpecsPkg.Example;
 
 Aircraft.Specs.TLAR.Class = EngineType;
 Aircraft.Specs.TLAR.MaxPax = Passengers;
-Aircraft.Specs.Performance.Range = UnitConversionPkg.ConvLength(Range, "naut mi", "m");
+Aircraft.Specs.Performance.Range = Range;
 
 %%
 % call pre-specprocessing, it will fill in unspecified fields with NaNs if the user forgets one
