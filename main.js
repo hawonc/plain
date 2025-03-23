@@ -9,6 +9,7 @@ function createWindow() {
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false, // Allow Node.js access to frontend
+      webSecurity: false,  // Disabling security (only for local dev, not production)
     }
   });
 
