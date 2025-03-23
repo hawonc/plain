@@ -1,0 +1,49 @@
+{
+  "name": "plain_project",
+  "version": "1.0.0",
+  "description": "Ian's dream of big planes in his pocket",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "test": "\"echo \\\"No test specified\\\" && exit 1",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "tailwind:init": "tailwindcss init"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hawonc/plain.git"
+  },
+  "keywords": [
+    "[",
+    "\"electron\"",
+    "\"desktop",
+    "app\"",
+    "\"javascript\"",
+    "]"
+  ],
+  "author": "Isaac Kim, Ian Kim, Hawon Cho, Yunsu Park",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hawonc/plain/issues"
+  },
+  "homepage": "https://github.com/hawonc/plain#readme",
+  "devDependencies": {
+    "@electron-forge/cli": "^7.7.0",
+    "@electron-forge/maker-deb": "^7.7.0",
+    "@electron-forge/maker-rpm": "^7.7.0",
+    "@electron-forge/maker-squirrel": "^7.7.0",
+    "@electron-forge/maker-zip": "^7.7.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.7.0",
+    "@electron-forge/plugin-fuses": "^7.7.0",
+    "@electron/fuses": "^1.8.0",
+    "autoprefixer": "^10.4.21",
+    "electron": "^35.0.3",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^3.4.17"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.0.15",
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}
