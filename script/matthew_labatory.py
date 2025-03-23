@@ -28,7 +28,7 @@ def gen_nums(EngineType, Passengers, Range, BA, EA):
 
 def winnable(EngineType, Passengers, Range):
 
-    client = genai.Client(api_key="AIzaSyCOdRuZBc36iiGWu-N1wrtwblSXHznEYaY")
+    client = genai.Client(api_key="API-KEY")
 
     response = client.models.generate_content(
         model="gemini-2.0-flash", contents="give me a cruising altitude for a plane with engine type " + EngineType + " number of passengers " + str(Passengers) + " people and range " + str(Range) + " meters. only return 1 number in range(22000, 45000)"
