@@ -9,11 +9,13 @@ npm -v
 npm init
 npm install --save-dev electron
 
-To run the file through terminal 
+
+Run these in three different terminals
 npm run start 
 
-To make tailwindcss
 npx tailwindcss -o dist/output.css --watch
+
+npm run dev
 
 
 # References

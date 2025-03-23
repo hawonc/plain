@@ -18,35 +18,80 @@
         </iframe>
       </div>
 
-      <!-- Input box -->
-      <div class="flex items-center space-x-4">
-        <input 
-          id="user-input" 
-          type="text" 
-          placeholder="Type your message..." 
-          class="bg-[#606060] w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
-        />
-        <button 
-          id="send-button"
-          class="px-4 py-2 bg-[#00274D] text-white rounded-lg hover:bg-blue-700 focus:outline-none"
-        >
-          Send
-        </button>
+      <!-- Input form -->
+      <div class="space-y-4">
+        <!-- Fan Type Dropdown -->
+        <div>
+          <label for="fan-type" class="text-white">Fan Type:</label>
+          <select id="fan-type" class="bg-[#606060] w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2">
+            <option value="fan1">Fan Type 1</option>
+            <option value="fan2">Fan Type 2</option>
+            <option value="fan3">Fan Type 3</option>
+            <option value="fan4">Fan Type 4</option>
+          </select>
+        </div>
+        
+        <!-- Number of Passengers Input -->
+        <div>
+          <label for="passengers" class="text-white">Number of Passengers:</label>
+          <input 
+            id="passengers" 
+            type="number" 
+            placeholder="Enter number of passengers" 
+            class="bg-[#606060] w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+          />
+        </div>
+
+        <!-- Range Input -->
+        <div>
+          <label for="range" class="text-white">Range (in km):</label>
+          <input 
+            id="range" 
+            type="number" 
+            placeholder="Enter range in km" 
+            class="bg-[#606060] w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2"
+          />
+        </div>
+        
+        <!-- Send Button -->
+        <div class="flex items-center justify-end space-x-4 mt-4">
+          <button 
+            id="send-button"
+            class="px-4 py-2 bg-[#00274D] text-white rounded-lg hover:bg-blue-700 focus:outline-none"
+          >
+            Send
+          </button>
+        </div>
       </div>
     </div>
   </div>
 
   <script>
     const sendButton = document.getElementById('send-button');
-    const userInput = document.getElementById('user-input');
+    const fanType = document.getElementById('fan-type');
+    const passengersInput = document.getElementById('passengers');
+    const rangeInput = document.getElementById('range');
     const { ipcRenderer } = require('electron');  // Electron IPC to communicate with main process
 
     sendButton.addEventListener('click', () => {
-      const message = userInput.value.trim();
-      if (message !== '') {
-        // Send the input to the main process to run Python script
-        ipcRenderer.send('run-python', message);
-        userInput.value = '';  // Clear the input field
+      const fan = fanType.value;
+      const passengers = passengersInput.value.trim();
+      const range = rangeInput.value.trim();
+
+      // Validate inputs
+      if (fan && passengers !== '' && range !== '') {
+        // Send the data to the main process
+        ipcRenderer.send('run-python', {
+          fanType: fan,
+          numberOfPassengers: passengers,
+          range: range
+        });
+
+        // Clear the inputs after sending
+        passengersInput.value = '';
+        rangeInput.value = '';
+      } else {
+        alert("Please fill all the fields.");
       }
     });
 
