@@ -11,11 +11,13 @@ npm install --save-dev electron
 
 
 Run these in three different terminals
-npm run start 
+
 
 npx tailwindcss -o dist/output.css --watch
 
 npm run dev
+
+npm run start 
 
 
 # References
