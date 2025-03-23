@@ -1,5 +1,6 @@
 import bpy
 import math
+import uuid
 
 def store_original_transforms(obj):
     """
@@ -155,7 +156,20 @@ def scale_and_position_aircraft(
     # Right engines (mirror Y):
     rein_obj.location  = (engine_x_offset, -engine_y_inner, engine_z_offset)
 
-    print("Aircraft scaled and positioned with engine_diameter applied and outer engines discarded.")
+    if not bpy.context.preferences.addons.get("io_scene_gltf2"):
+        bpy.ops.preferences.addon_enable(module="io_scene_gltf2")
+    
+    
+    file_name = str(uuid.uuid4()) + ".glb"
+    export_path = r"aircraft-models\\models\\" + file_name
+
+    # Set your desired export path (update the path as needed)
+    
+
+    # Export the entire scene to GLB (binary glTF format).
+    bpy.ops.export_scene.gltf(filepath=export_path, export_format='GLB')
+    
+    return file_name
 
 
 # -----------------------------------------------------------------------------
@@ -170,15 +184,15 @@ scale_and_position_aircraft(
     engine_diameter=0.75    # m (desired engine diameter)
 )
 
-# Ensure the glTF addon is enabled
-if not bpy.context.preferences.addons.get("io_scene_gltf2"):
-    bpy.ops.preferences.addon_enable(module="io_scene_gltf2")
 
-# Set your desired export path (update the path as needed)
-export_path = r"C:\Users\ybrot\OneDrive\Desktop\Projects\plain\aircraft-models\exported_aircraft.glb"
+# # Ensure the glTF addon is enabled
+# if not bpy.context.preferences.addons.get("io_scene_gltf2"):
+#     bpy.ops.preferences.addon_enable(module="io_scene_gltf2")
 
-# Export the entire scene to GLB (binary glTF format).
-bpy.ops.export_scene.gltf(filepath=export_path, export_format='GLB')
+# # Set your desired export path (update the path as needed)
+# export_path = r"C:\Users\ybrot\OneDrive\Desktop\Projects\plain\aircraft-models\exported_aircraft.glb"
 
-print("Exported scaled aircraft model to", export_path)
+# # Export the entire scene to GLB (binary glTF format).
+# bpy.ops.export_scene.gltf(filepath=export_path, export_format='GLB')
+
 
