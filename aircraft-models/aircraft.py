@@ -48,6 +48,7 @@ def scale_and_position_aircraft(
     # -------------------------------------------------------------------------
     # 1) Retrieve objects by name
     # -------------------------------------------------------------------------
+    bpy.ops.wm.open_mainfile(filepath="aircraft.blend")
     col_name = "aircraft"
     col = bpy.data.collections.get(col_name)
     if not col:
@@ -162,14 +163,14 @@ def scale_and_position_aircraft(
     
     
     file_name = str(uuid.uuid4()) + ".glb"
-    export_path = r"aircraft-models\\models\\" + file_name
+    export_path = "models/" + file_name
 
     # Set your desired export path (update the path as needed)
     
 
     # Export the entire scene to GLB (binary glTF format).
     bpy.ops.export_scene.gltf(filepath=export_path, export_format='GLB')
-    
+    bpy.ops.wm.read_factory_settings(use_empty=True)
     return file_name
 
 
@@ -177,13 +178,13 @@ def scale_and_position_aircraft(
 # Example usage:
 # -----------------------------------------------------------------------------
 # Uncomment and adjust the parameters as needed, then run the script.
-scale_and_position_aircraft(
-    body_length=32.268,       # m
-    body_diameter=4.033,      # m
-    wing_span_area=62.2867,   # m² (total for both wings)
-    chord_length=22.322,      # m (full wing span, tip-to-tip)
-    engine_diameter=0.75    # m (desired engine diameter)
-)
+# scale_and_position_aircraft(
+#     body_length=32.268,       # m
+#     body_diameter=4.033,      # m
+#     wing_span_area=62.2867,   # m² (total for both wings)
+#     chord_length=22.322,      # m (full wing span, tip-to-tip)
+#     engine_diameter=0.75    # m (desired engine diameter)
+# )
 
 args = sys.argv
 if "--" in args:
