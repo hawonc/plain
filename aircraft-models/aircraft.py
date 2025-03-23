@@ -1,6 +1,7 @@
 import bpy
 import math
 import uuid
+import sys
 
 def store_original_transforms(obj):
     """
@@ -184,15 +185,40 @@ scale_and_position_aircraft(
     engine_diameter=0.75    # m (desired engine diameter)
 )
 
+args = sys.argv
+if "--" in args:
+    idx = args.index("--")
+    user_args = args[idx+1:]
+else:
+    user_args = []
 
-# # Ensure the glTF addon is enabled
-# if not bpy.context.preferences.addons.get("io_scene_gltf2"):
-#     bpy.ops.preferences.addon_enable(module="io_scene_gltf2")
+if len(user_args) >= 5:
+    try:
+        body_length    = float(user_args[0])
+        body_diameter  = float(user_args[1])
+        wing_span_area = float(user_args[2])
+        chord_length   = float(user_args[3])
+        engine_diameter= float(user_args[4])
+    except Exception as e:
+        print("Error parsing arguments. Using default values.", e)
+        body_length = 32.268
+        body_diameter = 4.033
+        wing_span_area = 62.2867
+        chord_length = 22.322
+        engine_diameter = 0.75
+else:
+    # Default values if not enough arguments are provided.
+    body_length = 32.268       # m
+    body_diameter = 4.033      # m
+    wing_span_area = 62.2867   # m²
+    chord_length = 22.322      # m
+    engine_diameter = 0.75     # m
 
-# # Set your desired export path (update the path as needed)
-# export_path = r"C:\Users\ybrot\OneDrive\Desktop\Projects\plain\aircraft-models\exported_aircraft.glb"
+# Run the scaling and exporting function with parameters from command-line (or defaults)
+scale_and_position_aircraft(body_length, body_diameter, wing_span_area, chord_length, engine_diameter)
 
-# # Export the entire scene to GLB (binary glTF format).
-# bpy.ops.export_scene.gltf(filepath=export_path, export_format='GLB')
+
+# Example Usage:
+# "C:\Program Files\Blender Foundation\Blender 4.4\blender.exe" -b "C:\path\to\your\aircraft.blend" --python "C:\path\to\your\aircraft.py" -- 1 1 1 1 1
 
 
