@@ -2,7 +2,8 @@ import bpy
 import math
 import uuid
 import sys
-
+import os
+os.chdir('/Users/hawonc/Desktop/plain/aircraft-models')
 def store_original_transforms(obj):
     """
     If not already stored, save the object's original location, rotation, and scale.
@@ -216,7 +217,7 @@ else:
     engine_diameter = 0.75     # m
 
 # Run the scaling and exporting function with parameters from command-line (or defaults)
-scale_and_position_aircraft(body_length, body_diameter, wing_span_area, chord_length, engine_diameter)
+# scale_and_position_aircraft(body_length, body_diameter, wing_span_area, chord_length, engine_diameter)
 
 
 # Example Usage:

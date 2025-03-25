@@ -7,6 +7,36 @@
   <link href="./dist/output.css" rel="stylesheet">
   <title>Chat with pl.AI.n</title>
 </head>
+<style>
+  /* CSS Styling */
+  #output-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  }
+
+  #output-box {
+      width: 80%;
+      max-width: 600px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      font-family: Arial, sans-serif;
+      color: #333;
+  }
+
+  #output {
+      font-size: 16px;
+      word-wrap: break-word;
+      margin: 0;
+      white-space: pre-wrap;  /* Ensures that JSON format is respected */
+      font-family: monospace; /* Better for displaying JSON */
+      color: #333;
+  }
+</style>
 <body class="bg-[url(./panam.png)] bg-cover bg-center bg-no-repeat text-white font-sans">
   <div class="flex flex-col items-center justify-center min-h-screen py-6 px-4">
     <div class="w-full max-w-xl bg-white bg-opacity-10 backdrop-blur-xl rounded-lg p-6 shadow-lg border border-white border-opacity-40">
@@ -24,10 +54,9 @@
         <div>
           <label for="fan-type" class="text-white">Fan Type:</label>
           <select id="fan-type" class="bg-[#606060] w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2">
-            <option value="fan1">Fan Type 1</option>
-            <option value="fan2">Fan Type 2</option>
-            <option value="fan3">Fan Type 3</option>
-            <option value="fan4">Fan Type 4</option>
+            <option value="Turbofan">Turbofan</option>
+            <option value="Turboprop">Turboprop</option>
+
           </select>
         </div>
         
@@ -96,10 +125,18 @@
     });
 
     // Listen for the output from Python script
-    ipcRenderer.on('python-output', (event, output) => {
-      console.log('Python Output:', output);
-      // You can display the output here or use it as needed
-    });
+    ipcRenderer.on('donezo', (event, output) => {
+    console.log('Python Output:', output);
+    // Get the HTML element where we want to display the output
+    const outputElement = document.getElementById('output');
+    // Display the output in the HTML element
+    outputElement.textContent = output; // You can also use innerHTML if you want to include HTML content
+});
   </script>
+  <div id="output-container">
+    <div id="output-box">
+        <p id="output">Waiting for Python output...</p>
+    </div>
+</div>
 </body>
 </html>
